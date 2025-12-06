@@ -134,12 +134,15 @@ export default function CreateProjectModal({ isOpen, onClose }: CreateProjectMod
               <Github className="w-4 h-4" />
               GitHub Repository
             </label>
-            <Select value={selectedRepoId} onValueChange={setSelectedRepoId}>
+            <Select
+              value={selectedRepoId || "none"}
+              onValueChange={(value) => setSelectedRepoId(value === "none" ? "" : value)}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="No repository linked" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">No repository linked</SelectItem>
+                <SelectItem value="none">No repository linked</SelectItem>
                 {repos.map((repo) => (
                   <SelectItem key={repo.id} value={String(repo.id)}>
                     {repo.full_name}
